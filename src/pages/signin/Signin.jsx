@@ -1,17 +1,19 @@
 import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle, FaLinkedin,FaFacebook } from "react-icons/fa";
 import { AuthContext } from '../../Contexts/AuthProvider';
 
 const Signin = () => {
     const navigate = useNavigate();
+    const location = useLocation()
+    const from = location?.state?.from.pathname || ""
     const [error, setError] = useState("");
     const {userSignin, googleSignin} = useContext(AuthContext)
     const handleGoogleSignin = ()=>{
         googleSignin()
         .then(res =>{
             console.log(res.user)
-            navigate('/')
+            navigate(from, {replace: true})
         })
         .catch(error=>console.log(error))
     }
@@ -24,7 +26,7 @@ const Signin = () => {
         .then(user => {
             console.log(user.user)
             event.target.reset();
-            navigate('/')
+            navigate(from, {replace: true})
         })
         .catch(error => setError(error.message))
     }
@@ -50,7 +52,7 @@ const Signin = () => {
                     <p className='text-red-600'>{error}</p>
                     </div>
                     <div className="form-control mt-6">
-                        <input className="btn bg-blue-600 border-none text-white" type="submit" value="Signup" />
+                        <input className="btn bg-blue-600 border-none text-white" type="submit" value="Signin" />
                     </div>
                     <div>
                             <p className='text-center'>Or Signin With</p>

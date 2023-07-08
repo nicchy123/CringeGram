@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Post from "../../components/Post/Post";
+import { PropsProvider } from "../../Contexts/CommonPropsProovider";
 
 const Media = () => {
   const [loading, setLoading] = useState(true);
-  const [loader, setLoader] = useState(false);
+  const {loader, setLoader} = useContext(PropsProvider)
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -13,7 +14,7 @@ const Media = () => {
         setLoading(false);
         setPosts(data);
       });
-  }, []);
+  }, [loader]);
   if(loading){
     return <div className='min-h-[600px] flex justify-center items-center'>
         <span className="loading loading-bars loading-lg"></span>

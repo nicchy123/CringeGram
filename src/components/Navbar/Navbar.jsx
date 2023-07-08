@@ -14,7 +14,7 @@ const Navbar = () => {
        <li><Link>Home</Link></li>
        <li><Link to="/media">Media </Link></li>
        <li><Link>Message</Link></li>
-       <li><Link>About</Link></li>
+       <li><Link to="about">About</Link></li>
        <li><Link to="signin">Signin</Link></li>
      { user?
        <li><Link onClick={handleSingout} to="/">Signout</Link></li>:
